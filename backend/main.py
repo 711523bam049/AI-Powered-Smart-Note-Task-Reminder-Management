@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from config.config import settings
 from api.auth import router as auth_router
 from api.user import router as user_router
+from api.captures import router as captures_router
+from api.search import router as search_router
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -24,6 +26,8 @@ app.add_middleware(
 # Include API Routers
 app.include_router(auth_router, prefix=settings.API_V1_STR)
 app.include_router(user_router, prefix=settings.API_V1_STR)
+app.include_router(captures_router, prefix=settings.API_V1_STR)
+app.include_router(search_router, prefix=settings.API_V1_STR)
 
 @app.get("/", tags=["Health"])
 def health_check():
