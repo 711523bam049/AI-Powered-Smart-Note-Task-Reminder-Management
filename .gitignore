@@ -1,0 +1,20 @@
+# Python Environment
+backend/.venv/
+backend/__pycache__/
+backend/*.db
+backend/*.db-journal
+backend/.pytest_cache/
+backend/ml_weights/
+.pytest_cache/
+__pycache__/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# OS Files
+.DS_Store
+Thumbs.db
