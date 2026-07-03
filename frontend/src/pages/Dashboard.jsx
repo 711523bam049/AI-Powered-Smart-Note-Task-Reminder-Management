@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
 import StatCard from '../components/StatCard';
 import SkeletonLoader from '../components/SkeletonLoader';
+import CaptureInput from '../components/CaptureInput';
+import ManualCaptureModal from '../components/ManualCaptureModal';
 import api from '../services/api';
 import { 
   FileText, 
@@ -17,6 +19,7 @@ export default function Dashboard() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchStats = async () => {
     try {
@@ -50,10 +53,18 @@ export default function Dashboard() {
                 Here's a summary of your workspace activities and notes.
               </p>
             </div>
-            <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-purple to-brand-purple/80 hover:from-brand-purple hover:to-brand-purple text-white text-sm font-semibold rounded-lg shadow-md transition-all duration-300 hover:scale-[1.02] cursor-pointer">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-purple to-brand-purple/80 hover:from-brand-purple hover:to-brand-purple text-white text-sm font-semibold rounded-lg shadow-md transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+            >
               <Plus size={16} />
               Quick Capture
             </button>
+          </div>
+
+          {/* Natural Language Processing Input Bar */}
+          <div className="w-full max-w-3xl">
+            <CaptureInput onCaptureSuccess={fetchStats} />
           </div>
 
           {error && (
@@ -98,7 +109,7 @@ export default function Dashboard() {
             />
           </div>
 
-          {/* Recent Workspace Updates Mock Area */}
+          {/* Recent Workspace Updates Area */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 glass rounded-2xl p-6 space-y-4">
               <div className="flex justify-between items-center pb-2 border-b border-[var(--border-color)]">
@@ -161,6 +172,13 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+
+          {/* Manual Capture Modal Trigger */}
+          <ManualCaptureModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onSuccess={fetchStats}
+          />
         </div>
       ) : (
         <div className="text-left font-sans space-y-4">
