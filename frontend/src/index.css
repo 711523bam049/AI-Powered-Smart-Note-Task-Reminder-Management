@@ -8,14 +8,32 @@
   --color-brand-purple: #aa3bff;
   --color-brand-blue: #00ecff;
   
-  --color-dark-950: #050508;
-  --color-dark-900: #0b0a12;
-  --color-dark-800: #141324;
-  --color-dark-700: #1e1c38;
-  --color-dark-600: #2d2b54;
-  
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-slow: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+:root {
+  /* Default: Dark Theme */
+  --bg-color: #050508;
+  --bg-panel: rgba(20, 19, 36, 0.65);
+  --bg-panel-solid: #0f0f1b;
+  --bg-hover: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.05);
+  --text-main: #f4f4f5;
+  --text-muted: #9ca3af;
+  --shadow-color: rgba(0, 0, 0, 0.6);
+}
+
+:root.light {
+  /* Light Theme */
+  --bg-color: #fafafb;
+  --bg-panel: rgba(255, 255, 255, 0.7);
+  --bg-panel-solid: #ffffff;
+  --bg-hover: rgba(0, 0, 0, 0.04);
+  --border-color: rgba(0, 0, 0, 0.06);
+  --text-main: #18181b;
+  --text-muted: #71717a;
+  --shadow-color: rgba(0, 0, 0, 0.08);
 }
 
 @keyframes float {
@@ -30,33 +48,34 @@
 
 /* Glassmorphism custom classes and scrollbars */
 @utility glass {
-  background: rgba(20, 19, 36, 0.6);
+  background: var(--bg-panel);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
 }
 
 @utility glass-light {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
 }
 
 @utility shadow-premium {
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 40px 0 var(--shadow-color);
 }
 
 @utility text-glow {
-  text-shadow: 0 0 12px rgba(170, 59, 255, 0.4);
+  text-shadow: 0 0 12px rgba(170, 59, 255, 0.35);
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-dark-950);
-  color: #e4e4e7;
+  background-color: var(--bg-color);
+  color: var(--text-main);
   margin: 0;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -69,10 +88,10 @@ h1, h2, h3, h4, h5, h6 {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-dark-950);
+  background: var(--bg-color);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-dark-600);
+  background: var(--bg-hover);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
