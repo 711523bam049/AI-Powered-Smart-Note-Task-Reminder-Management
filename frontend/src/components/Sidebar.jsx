@@ -20,6 +20,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
     { id: 'notes', label: 'Notes', icon: FileText },
     { id: 'tasks', label: 'Tasks', icon: CheckSquare },
     { id: 'reminders', label: 'Reminders', icon: Bell },
+    { id: 'search', label: 'Search & Query', icon: Search },
   ];
 
   return (
